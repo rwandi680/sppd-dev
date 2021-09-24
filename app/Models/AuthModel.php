@@ -27,7 +27,7 @@ class AuthModel extends Model
 
     public function getUsername($user)
     {
-        return $this->user->where('xusername', $user)->get()->getRow();
+        return $this->user->where('nama_user', $user)->get()->getRow();
     }
 
     public function addLog($params)

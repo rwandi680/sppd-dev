@@ -5,19 +5,21 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AturModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use ErrorException;
 
-class CetakCtrl extends BaseController
+class DashboardCtrl extends BaseController
 {
     protected $aturModel;
-    protected $pdf;
 
     public function __construct()
     {
         $db = \db_connect();
         $this->aturModel = new AturModel($db);
-        $options = new \Dompdf\Options();
-        $options->set('isRemoteEnabled', TRUE);
-        $this->pdf = new \Dompdf\Dompdf($options);
     }
 
+    public function adminarea()
+    {
+        $data['title'] = 'Selamat Datang!';
+        echo view('dashboard/adminarea', $data);
+    }
 }

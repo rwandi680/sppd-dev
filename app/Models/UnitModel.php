@@ -11,16 +11,12 @@ class UnitModel extends Model
     protected $db;
     protected $skpd;
     protected $kadis;
-    protected $tapd;
-    protected $ttd;
 
     public function __construct(ConnectionInterface &$db)
     {
         $this->db = &$db;
         $this->skpd = $this->db->table('tbl_skpd');
         $this->kadis = $this->db->table('tbl_kepala_skpd');
-        $this->tapd = $this->db->table('tbl_tapd');
-        $this->ttd = $this->db->table('tbl_ttd_tapd');
     }
 
     public function getUnitId($id)
@@ -115,27 +111,5 @@ class UnitModel extends Model
     {
         $this->kadis->where('id_kepala_skpd', $id);
         return $this->kadis->delete();
-    }
-
-    public function getProfilTapd()
-    {
-        return $this->tapd->get()->getFirstRow();
-    }
-
-    public function getProfilTapdId($id)
-    {
-        $this->tapd->where('id_tapd', $id);
-        return $this->tapd->get()->getRow();
-    }
-
-    public function updateProfilTapd($id, $params)
-    {
-        $this->tapd->where('id_tapd', $id);
-        return $this->tapd->update($params);
-    }
-
-    public function getTtdTapd()
-    {
-        return $this->ttd->get()->getFirstRow();
     }
 }

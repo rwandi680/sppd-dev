@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>GeserAPP | <?= $title ?></title>
+    <title>SPPD Master | <?= $title ?></title>
 
     <!-- FAVICON -->
     <link href="<?= site_url() ?>public/assets/img/favicon.png" rel="shortcut icon" />
@@ -34,7 +34,7 @@
                                         <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
                                     </g>
                                 </svg>
-                                <span class="brand-name">Geser App</span>
+                                <span class="brand-name">SPPD Master</span>
                             </a>
                         </div>
                     </div>

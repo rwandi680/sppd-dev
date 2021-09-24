@@ -132,11 +132,4 @@ class AuthCtrl extends BaseController
             throw new PageNotFoundException("Halaman tidak ditemukan");
         }
     }
-
-    public function cobaxml()
-    {
-        $data = simplexml_load_file('public/uploads/data.xml');
-        // \print_r($data);
-        return \json_encode($data);
-    }
 }

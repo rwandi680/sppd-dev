@@ -13,7 +13,6 @@ class AturModel extends Model
 	protected $menu;
 	protected $submenu;
 	protected $menuakses;
-	protected $tahap;
 	protected $user;
 
 	public function __construct(ConnectionInterface &$db)
@@ -24,7 +23,6 @@ class AturModel extends Model
 		$this->menu = $this->db->table('tbl_menu');
 		$this->submenu = $this->db->table('tbl_sub_menu');
 		$this->menuakses = $this->db->table('tbl_menu_akses');
-		$this->tahap = $this->db->table('tbl_tahapan');
 		$this->user = $this->db->table('tbl_user');
 	}
 
@@ -56,33 +54,7 @@ class AturModel extends Model
 		return $this->tahun->delete();
 	}
 
-	// Role
-	public function getRoleId($id)
-	{
-		return $this->role->where('id_role', $id)->get()->getRow();
-	}
 
-	public function getRole()
-	{
-		return $this->role->get()->getResult();
-	}
-
-	public function addRole($params)
-	{
-		return $this->role->insert($params);
-	}
-
-	public function updateRole($id, $params)
-	{
-		$this->role->where('id_role', $id);
-		return $this->role->update($params);
-	}
-
-	public function deleteRole($id)
-	{
-		$this->role->where('id_role', $id);
-		return $this->role->delete();
-	}
 
 	//tahapan
 	public function getTahapId($id)
@@ -201,42 +173,5 @@ class AturModel extends Model
 		return $this->menuakses->get()->getResult();
 	}
 
-	// User
-	public function getUserId($id)
-	{
-		return $this->user->where('id_user', $id)->get()->getRow();
-	}
 
-	public function getUser()
-	{
-		$this->user->select(
-			[
-				'tbl_skpd.nama_skpd',
-				'tbl_role.role',
-				'tbl_user.id_user',
-				'tbl_user.xusername',
-				'tbl_user.nama_lengkap',
-			]
-		)
-			->join('tbl_skpd', 'tbl_skpd.id_skpd = tbl_user.id_skpd', 'left')
-			->join('tbl_role', 'tbl_role.id_role = tbl_user.id_role', 'left');
-		return $this->user->get()->getResult();
-	}
-
-	public function addUser($params)
-	{
-		return $this->user->insert($params);
-	}
-
-	public function updateUser($id, $params)
-	{
-		$this->user->where('id_user', $id);
-		return $this->user->update($params);
-	}
-
-	public function deleteUser($id)
-	{
-		$this->user->where('id_user', $id);
-		return $this->user->delete();
-	}
 }

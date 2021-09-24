@@ -38,12 +38,11 @@ class RoleCtrl extends BaseController
 	{
 		$data = $this->aturModel->getRole();
 		$ajax = [];
-		$no = 1;
 		foreach ($data as $t) {
 			$id = $t->id_role;
 			$opsi = '<div class="dropdown text-center">
-                        <button class="btn btn-pill btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-view-list"></i>
+                        <button class="btn btn-sm btn-pill btn-outline-primary" data-toggle="dropdown">
+                            <i class="mdi mdi-menu"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
 							<a href="#" class="dropdown-item" id="btnEdit" data-id="' . \encrypt_url($id)  . '"><i class="mdi mdi-pencil"></i> Edit</a>
@@ -52,8 +51,8 @@ class RoleCtrl extends BaseController
                     </div>';
 			$row = array(
 				'id' => $id,
-				'role' => $t->role,
-				'ket' => $t->ket,
+				'role' => $t->nama_role,
+				'ket' => $t->ket_role,
 				'opsi' => $opsi,
 			);
 			$ajax[] = $row;
@@ -64,13 +63,12 @@ class RoleCtrl extends BaseController
 		return json_encode($output);
 	}
 
-	public function tambahRole()
+	public function tambah()
 	{
 		if ($_POST) {
 			$params = array(
-				'role' => $this->request->getPost('role'),
-				'ket' => $this->request->getPost('ket'),
-
+				'nama_role' => $this->request->getPost('role'),
+				'ket_role' => $this->request->getPost('ket'),
 			);
 			$insert = $this->aturModel->addRole($params);
 			if ($insert) {
@@ -83,14 +81,14 @@ class RoleCtrl extends BaseController
 		}
 	}
 
-	public function editRole()
+	public function edit()
 	{
 		$id = \decrypt_url($this->request->getPost('id'));
 		$data  = $this->aturModel->getRoleId($id);
 		if (isset($data->id_role)) {
 			$params = array(
-				'role' => $this->request->getPost('x_role'),
-				'ket' => $this->request->getPost('x_ket'),
+				'nama_role' => $this->request->getPost('x_role'),
+				'ket_role' => $this->request->getPost('x_ket'),
 			);
 			$update = $this->aturModel->updateRole($id, $params);
 			if ($update) {
@@ -103,7 +101,7 @@ class RoleCtrl extends BaseController
 		}
 	}
 
-	public function hapusRole()
+	public function hapus()
 	{
 		$id = \decrypt_url($this->request->getPost('id'));
 		$data  = $this->aturModel->getRoleId($id);

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>GeserAPP | <?= $title ?></title>
+    <title>SPPD MAster | <?= $title ?></title>
 
     <link href="<?= site_url() ?>public/assets/font/mdi/css/materialdesignicons.css" rel="stylesheet" />
     <link href="<?= site_url() ?>public/assets/font/roboto/roboto.css" rel="stylesheet" />
@@ -53,7 +53,7 @@
                 <div class="app-brand">
                     <a href="#" style="margin-left: -10px;">
                         <img src="<?= site_url() ?>public/assets/img/logo.png" alt="logo_pnd" style="width: 45px;">
-                        <span class="brand-name">GeserAPP</span>
+                        <span class="brand-name">SPPD</span>
                     </a>
                 </div>
                 <!-- begin sidebar scrollbar -->
@@ -61,58 +61,7 @@
 
                     <!-- sidebar menu -->
                     <ul class="nav sidebar-inner" id="sidebar-menu">
-                        <?php
 
-                        $role =  session('ses_role');
-                        $db = \Config\Database::connect();
-                        $qMenu = $db->query("SELECT tbl_menu.id_menu, menu, icon, link, sub_menu 
-                    FROM tbl_menu
-                    JOIN tbl_menu_akses ON tbl_menu.id_menu = tbl_menu_akses.id_menu 
-                    WHERE tbl_menu_akses.id_role = '$role'
-                    GROUP BY tbl_menu.id_menu
-                    ORDER BY menu_order ASC
-                    ");
-
-                        foreach ($qMenu->getResult() as $menu) {
-                            if ($menu->sub_menu == 'TRUE') {
-                                $qSubMenu = $db->query("SELECT sub_menu, link 
-                            FROM tbl_sub_menu
-                            JOIN tbl_menu_akses ON tbl_sub_menu.id_sub_menu = tbl_menu_akses.id_sub_menu 
-                            WHERE tbl_menu_akses.id_role = '$role' AND tbl_sub_menu.id_menu = '$menu->id_menu'
-                            ORDER BY sub_order ASC
-                            ");
-                                echo '
-                            <li class="has-sub">
-                                <a href="javascript:void(0);" class="sidenav-item-link" data-toggle="collapse" data-target="#' . $menu->id_menu . '" aria-expanded="false" aria-controls="' . $menu->id_menu . '">
-                                    <i class="' . $menu->icon . '"></i>
-                                    <span class="nav-text">' . $menu->menu . '</span> <b class="caret"></b>
-                                </a>
-                                <ul class="collapse" id="' . $menu->id_menu . '" data-parent="#sidebar-menu">
-                                    <div class="sub-menu">';
-                                foreach ($qSubMenu->getResult() as $subMenu) {
-                                    echo '<li>
-                                        <a href="' . site_url($subMenu->link) . '" class="sidenav-item-link">
-                                                <span class="nav-text">' . $subMenu->sub_menu . '</span>
-                                        </a>
-                                    </li>';
-                                }
-                                echo '
-                                    </div>
-                                </ul>
-                            </li>
-                            ';
-                            } else {
-                                echo '
-                            <li>
-                                <a href="' . site_url($menu->link) . '" class="sidenav-item-link">
-                                    <i class="' . $menu->icon . '"></i>
-                                    <span class="nav-text">' . $menu->menu . '</span>
-                                </a>
-                            </li>
-                            ';
-                            }
-                        }
-                        ?>
                     </ul>
 
                 </div>
@@ -126,20 +75,6 @@
                     <button id="sidebar-toggler" class="sidebar-toggle">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
-
-                    <?= form_open('auth/gantiTahun', ['id' => 'formGantiTahun', 'method' => 'POST']) ?>
-                    <select name="xtahun" id="gantiTahun" class="ml-2 form-control" style="width: 7em;">
-                        <?php
-                        $xthn = session('ses_tahun');
-                        $qThn = $db->query("SELECT tahun FROM tbl_tahun");
-                        foreach ($qThn->getResult() as $t) {
-                            $selected = ($t->tahun == $xthn) ? ' selected="selected"' : "";
-
-                            echo '<option value="' . $t->tahun . '" ' . $selected . '>' . $t->tahun . '</option>';
-                        }
-                        ?>
-                    </select>
-                    <?= form_close() ?>
 
                     <div class="navbar-right ml-auto">
                         <ul class="nav navbar-nav">
@@ -180,7 +115,7 @@
             <footer class="footer mt-auto">
                 <div class="copyright bg-white">
                     <p>
-                        &copy; <span id="copy-year">2019</span> | Sistem Informasi Manajemen Pergeseran Anggaran by
+                        &copy; <span id="copy-year">2019</span> | SPPD Master
                         <a class="text-primary" href="https://bpkd.pangandarankab.go.id/" target="_blank">BPKD Kab. Pangandaran</a>.
                     </p>
                 </div>

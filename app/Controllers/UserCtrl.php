@@ -78,7 +78,7 @@ class UserCtrl extends BaseController
         return json_encode($output);
     }
 
-    public function tambahUser()
+    public function tambah()
     {
         if ($_POST) {
             $defautlPass = "pangandarankab";
@@ -106,7 +106,7 @@ class UserCtrl extends BaseController
         }
     }
 
-    public function editUser()
+    public function edit()
     {
         $id = \decrypt_url($this->request->getPost('id'));
         $data = $this->aturModel->getUserId($id);
@@ -148,7 +148,7 @@ class UserCtrl extends BaseController
         }
     }
 
-    public function hapusUser()
+    public function hapus()
     {
         $id = \decrypt_url($this->request->getPost('id'));
         $data = $this->aturModel->getUserId($id);

@@ -49,8 +49,8 @@ class TahunCtrl extends BaseController
 				$btnSts = '<a href="#" class="dropdown-item" id="btnEditSts" data-id="' . \encrypt_url($thn)  . '" data-sts="1"><i class="mdi mdi-check"></i> Aktif</a>';
 			}
 			$opsi = '<div class="dropdown text-center">
-                        <button class="btn btn-pill btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-view-list"></i>
+                        <button class="btn btn-sm btn-pill btn-outline-primary" data-toggle="dropdown">
+                            <i class="mdi mdi-menu"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             ' . $btnSts . '
@@ -71,7 +71,7 @@ class TahunCtrl extends BaseController
 		return json_encode($output);
 	}
 
-	public function tambahTahun()
+	public function tambah()
 	{
 		if ($_POST) {
 			$params = array(
@@ -90,7 +90,7 @@ class TahunCtrl extends BaseController
 		}
 	}
 
-	public function editStsTahun()
+	public function editSts()
 	{
 		$thn = \decrypt_url($this->request->getPost('thn'));
 		$sts = $this->request->getPost('sts');
@@ -110,7 +110,7 @@ class TahunCtrl extends BaseController
 		}
 	}
 
-	public function hapusTahun()
+	public function hapus()
 	{
 		$thn = \decrypt_url($this->request->getPost('thn'));
 		$data = $this->aturModel->getTahunId($thn);
